@@ -43,7 +43,7 @@ static t_data	*init(t_data *fdf)
 	fdf->camera.x_rot = 0;
 	fdf->camera.y_rot = 0;
 	fdf->camera.z_rot = 0;
-	fdf->camera.flatten = 1;
+	fdf->camera.flatten = 5;
 	return (fdf);
 }
 

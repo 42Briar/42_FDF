@@ -29,7 +29,7 @@ typedef struct s_camera {
 	int		zoom;
 	int		offsetx;
 	int		offsety;
-	int		flatten;
+	float	flatten;
 	double	z_rot;
 	double	x_rot;
 	double	y_rot;

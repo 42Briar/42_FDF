@@ -37,11 +37,10 @@ void	camera(int keycode, t_data *fdf)
 void	flatten(int key, t_data *fdf)
 {
 	if (key == KEY_Q)
-		fdf->camera.flatten += 1;
+		fdf->camera.flatten += 0.1;
 	if (key == KEY_E)
-		fdf->camera.flatten -= 1;
-	if (fdf->camera.flatten < 1)
-		fdf->camera.flatten = 1;
-	printf("%d\n", fdf->camera.flatten);
+		fdf->camera.flatten -= 0.1;
+	if (fdf->camera.flatten < 0.1)
+		fdf->camera.flatten = 0.1;
 	drawmap(fdf);
 }
