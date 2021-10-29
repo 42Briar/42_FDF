@@ -2,9 +2,9 @@
 
 void	rotate(int key, t_data *fdf)
 {
-	if (key == KEY_NP_8)
-		fdf->camera.x_rot += 0.1;
 	if (key == KEY_NP_2)
+		fdf->camera.x_rot += 0.1;
+	if (key == KEY_NP_8)
 		fdf->camera.x_rot -= 0.1;
 	if (key == KEY_NP_4)
 		fdf->camera.y_rot += 0.1;

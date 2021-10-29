@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-t_coord	project(int x, int y, t_data *fdf)
+static t_coord	project(int x, int y, t_data *fdf)
 {
 	t_coord	iso;
 
