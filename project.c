@@ -6,7 +6,7 @@ t_coord	project(int x, int y, t_data *fdf)
 
 	iso.x = x * fdf->camera.zoom;
 	iso.y = y * fdf->camera.zoom;
-	iso.z = fdf->map.coords[y][x] * (fdf->camera.zoom / fdf->camera.flatten);
+	iso.z = fdf->map.coords[y][x] * (fdf->camera.zoom / fdf->camera.flatten);  //this is shit
 	rot_x(&iso.y, &iso.z, fdf->camera.x_rot);
 	rot_y(&iso.x, &iso.z, fdf->camera.y_rot);
 	rot_z(&iso.x, &iso.y, fdf->camera.z_rot);
