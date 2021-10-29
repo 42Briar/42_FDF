@@ -52,6 +52,8 @@ int	main(int argc, char *argv[])
 	t_data	*fdf;
 	int		fd;
 
+	if (argc > 2 || argc < 2)
+		exit(0);
 	fd = open(argv[1], O_RDONLY);
 	fdf = init(fdf);
 	parsemap(fd, fdf);

@@ -13,6 +13,8 @@ char	**readmap(int fd)
 			break ;
 		line[1] = ft_strjoin(line[1], line[0]);
 	}
+	if (!line[1])
+		exit(0);
 	return (ft_split(line[1], '\n'));
 }
 
