@@ -17,7 +17,7 @@ static int	ft_select(bool val, int a, int b)
 	return (b);
 }
 
-static void	define(t_var *delta, t_var *sign, t_var *cur, t_data *fdf)
+static void	define(t_coord *delta, t_coord *sign, t_coord *cur, t_data *fdf)
 {
 	delta->x = abs(fdf->xy.x - cur->x);
 	delta->y = abs(fdf->xy.y - cur->y);
@@ -25,11 +25,11 @@ static void	define(t_var *delta, t_var *sign, t_var *cur, t_data *fdf)
 	sign->y = ft_select(cur->y < fdf->xy.y, 1, -1);
 }
 
-void	drawline(t_var point1, t_var point2, t_data *fdf, t_var cxy)
+void	drawline(t_coord point1, t_coord point2, t_data *fdf, t_var cxy)
 {
-	t_var	delta;
-	t_var	sign;
-	t_var	cur;
+	t_coord	delta;
+	t_coord	sign;
+	t_coord	cur;
 	int		error;
 
 	cur = point1;

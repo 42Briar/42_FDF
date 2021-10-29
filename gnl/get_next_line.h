@@ -6,7 +6,7 @@
 # include <stdio.h>
 
 # define MAX_FD 1024
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 1000000
 
 char	*get_next_line(int fd);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

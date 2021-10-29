@@ -1,15 +1,16 @@
 #include "fdf.h"
 
-t_var	project(int x, int y, t_data *fdf)
+t_coord	project(int x, int y, t_data *fdf)
 {
-	t_var	iso;
+	t_coord	iso;
 
 	iso.x = x * fdf->camera.zoom;
 	iso.y = y * fdf->camera.zoom;
-	rot_x(&iso.y, &fdf->map.coords[y][x], fdf->camera.x_rot);
-	rot_y(&iso.x, &fdf->map.coords[y][x], fdf->camera.y_rot);
+	iso.z = fdf->map.coords[y][x] * (fdf->camera.zoom / fdf->camera.flatten);
+	rot_x(&iso.y, &iso.z, fdf->camera.x_rot);
+	rot_y(&iso.x, &iso.z, fdf->camera.y_rot);
 	rot_z(&iso.x, &iso.y, fdf->camera.z_rot);
-	isometric(&iso.x, &iso.y, fdf->map.coords[y][x]);
+	isometric(&iso.x, &iso.y, iso.z);
 	iso.x += (WIDTH / 2) + fdf->camera.offsetx;
 	iso.y += (HEIGHT / 2) + fdf->camera.offsety;
 	return (iso);

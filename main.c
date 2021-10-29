@@ -22,9 +22,10 @@ int	key_hook(int keycode, t_data *fdf)
 		camera(keycode, fdf);
 	if (keycode == KEY_NP_1 || keycode == KEY_NP_2 || keycode == KEY_NP_3 || \
 	keycode == KEY_NP_4 || keycode == KEY_NP_6 || keycode == KEY_NP_7 || \
-	keycode == KEY_NP_8 || keycode == KEY_NP_9 || keycode == KEY_Q || \
-	keycode == KEY_E)
+	keycode == KEY_NP_8 || keycode == KEY_NP_9)
 		rotate(keycode, fdf);
+	if (keycode == KEY_Q || keycode == KEY_E)
+		flatten(keycode, fdf);
 	return (0);
 }
 
@@ -42,6 +43,7 @@ static t_data	*init(t_data *fdf)
 	fdf->camera.x_rot = 0;
 	fdf->camera.y_rot = 0;
 	fdf->camera.z_rot = 0;
+	fdf->camera.flatten = 1;
 	return (fdf);
 }
 
@@ -52,7 +54,6 @@ int	main(int argc, char *argv[])
 
 	fd = open(argv[1], O_RDONLY);
 	fdf = init(fdf);
-	ft_bzero(&fdf->paint, sizeof(t_paint));
 	parsemap(fd, fdf);
 	mlx_mouse_hook(fdf->mlx_win, mouse_hook, fdf);
 	mlx_key_hook(fdf->mlx_win, key_hook, fdf);

@@ -17,13 +17,6 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-typedef struct s_paint {
-	int	x;
-	int	y;
-	int	mode;
-
-}	t_paint;
-
 typedef struct s_map {
 	int				**coords;
 	int				**colours;
@@ -36,6 +29,7 @@ typedef struct s_camera {
 	int		zoom;
 	int		offsetx;
 	int		offsety;
+	int		flatten;
 	double	z_rot;
 	double	x_rot;
 	double	y_rot;
@@ -47,6 +41,12 @@ typedef struct s_var {
 	int	y;
 }	t_var;
 
+typedef struct s_coord{
+	int	x;
+	int	y;
+	int	z;
+}	t_coord;
+
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -55,14 +55,13 @@ typedef struct s_data {
 	int		endian;
 	void	*mlx;
 	void	*mlx_win;
-	t_paint	paint;
 	t_map	map;
-	t_var	xy;
+	t_coord	xy;
 	t_cam	camera;
 }				t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	drawline(t_var point1, t_var point2, t_data *fdf, t_var colourxy);
+void	drawline(t_coord point1, t_coord point2, t_data *fdf, t_var cxy);
 void	parsemap(int fd, t_data *fdf);
 void	drawmap(t_data *fdf);
 void	isometric(int *x, int *y, int z);
@@ -71,5 +70,6 @@ void	rotate(int keycode, t_data *fdf);
 void	rot_x(int *y, int *z, double x_rot);
 void	rot_y(int *x, int *z, double y_rot);
 void	rot_z(int *x, int *y, double z_rot);
+void	flatten(int key, t_data *fdf);
 
 #endif
