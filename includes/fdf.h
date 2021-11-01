@@ -8,11 +8,9 @@
 # include "colours.h"
 
 # include <math.h>
-# include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdbool.h> 
+# include <stdbool.h>
 
 # define WIDTH 1920
 # define HEIGHT 1080

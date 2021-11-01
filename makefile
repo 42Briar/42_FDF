@@ -33,6 +33,7 @@ clean:
 	@rm -f $(OBJ)
 	@$(MAKE) -C $(LIBFT) clean
 	@$(MAKE) -C $(MLX) clean
+	@echo "$(RED)Done!$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)

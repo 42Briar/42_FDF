@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-char	**readmap(int fd)
+static char	**readmap(int fd)
 {
 	char	*line[2];
 
@@ -18,13 +18,13 @@ char	**readmap(int fd)
 	return (ft_split(line[1], '\n'));
 }
 
-int	store_colour(char *str, t_data *fdf, int i, int j)
+static int	store_colour(char *str, t_data *fdf, int i, int j)
 {
 	char	**arr;
 
 	if (!ft_strchr(str, ','))
 	{
-		fdf->map.colours[i][j] = 0x00ffffff;
+		fdf->map.colours[i][j] = WHITE;
 		return (ft_atoi(str));
 	}	
 	arr = ft_split(str, ',');
