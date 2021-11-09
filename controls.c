@@ -42,5 +42,7 @@ void	flatten(int key, t_data *fdf)
 		fdf->camera.flatten -= 0.1;
 	if (fdf->camera.flatten < 0.1)
 		fdf->camera.flatten = 0.1;
+	if (fdf->camera.flatten > 10)
+		fdf->camera.flatten = 10;
 	drawmap(fdf);
 }

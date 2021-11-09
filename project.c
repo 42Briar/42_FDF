@@ -56,6 +56,5 @@ void	drawmap(t_data *fdf)
 		}
 		y++;
 	}
-	mlx_clear_window(fdf->mlx, fdf->mlx_win);
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img, 0, 0);
 }

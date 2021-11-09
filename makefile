@@ -25,7 +25,7 @@ $(NAME): $(OBJ)
 	@$(MAKE) -C $(LIBFT)
 	@mv libft/libft.a .
 	@echo "$(GREEN)Compiling...$(RESET)"
-	@$(CC) $(SRC) $(HEADERS) libmlx.dylib libft.a -fsanitize=address -o $(NAME)
+	@$(CC) $(SRC) $(HEADERS) libmlx.dylib libft.a -o $(NAME)
 	@echo "$(GREEN)Done!$(RESET)"
 
 clean:
