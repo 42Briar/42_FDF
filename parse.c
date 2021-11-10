@@ -2,22 +2,22 @@
 
 static void	readmap(int fd, char ***temp)
 {
-	char	*line[2];
+	char	buf[1000001];
+	char	*map;
+	int		bread;
 
-	line[0] = (char *)1;
-	line[1] = NULL;
-	while (1)
+	bread = 1;
+	map = NULL;
+	while (bread > 0)
 	{
-		line[0] = get_next_line(fd);
-		if (!line[0])
+		bread = read(fd, buf, 1000000);
+		buf[bread] = 0;
+		if (bread == 0)
 			break ;
-		line[1] = ft_strjoin(line[1], line[0]);
+		map = ft_strjoin(map, buf);
 	}
-	if (!line[1])
-		exit(0);
-	*temp = ft_split(line[1], '\n');
-	free(line[0]);
-	free(line[1]);
+	*temp = ft_split(map, '\n');
+	free(map);
 }
 
 static void	store_colour(char *str, t_data *fdf, int i, int j)
@@ -46,7 +46,21 @@ static void	define(char ***temp, t_data *fdf, int fd)
 	fdf->map.height = ft_arrlen(*temp);
 	fdf->map.width = 0;
 	fdf->map.coords = (int **)malloc(fdf->map.height * sizeof(int *));
+	if (!fdf->map.coords)
+		terminate(NULL);
 	fdf->map.colours = (int **)malloc(fdf->map.height * sizeof(int *));
+	if (!fdf->map.colours)
+		terminate(NULL);
+}
+
+static void	alloc(t_data *fdf, int i)
+{
+	fdf->map.coords[i] = (int *)malloc(fdf->map.width * sizeof(int));
+	if (!fdf->map.coords[i])
+		terminate(NULL);
+	fdf->map.colours[i] = (int *)malloc(fdf->map.width * sizeof(int));
+	if (!fdf->map.colours[i])
+		terminate(NULL);
 }
 
 void	parsemap(int fd, t_data *fdf)
@@ -56,27 +70,23 @@ void	parsemap(int fd, t_data *fdf)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	define(&temp, fdf, fd);
-	while (temp[i] != NULL)
+	while (temp[++i] != NULL)
 	{
-		j = 0;
+		j = -1;
 		str = ft_split(temp[i], ' ');
 		free(temp[i]);
 		if (!fdf->map.width)
 			fdf->map.width = ft_arrlen(str);
-		fdf->map.coords[i] = (int *)malloc(fdf->map.width * sizeof(int));
-		fdf->map.colours[i] = (int *)malloc(fdf->map.width * sizeof(int));
-		while (str[j] != NULL)
+		alloc(fdf, i);
+		while (str[++j] != NULL)
 		{
 			store_colour(str[j], fdf, i, j);
 			free(str[j]);
-			j++;
 		}
-		i++;
+		free(str);
 	}
 	free(temp);
-	free(str);
-	close(fd);
 	drawmap(fdf);
 }

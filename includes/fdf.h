@@ -69,5 +69,6 @@ void	rot_x(int *y, int *z, double x_rot);
 void	rot_y(int *x, int *z, double y_rot);
 void	rot_z(int *x, int *y, double z_rot);
 void	flatten(int key, t_data *fdf);
+int		terminate(void *param);
 
 #endif

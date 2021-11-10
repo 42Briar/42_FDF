@@ -1,21 +1,23 @@
 #include "fdf.h"
 
+int	terminate(void *param)
+{
+	(void)param;
+	exit(0);
+	return (0);
+}
+
 int	mouse_hook(int button, int x, int y, t_data *fdf)
 {
 	if (button == 2)
-	{
 		mlx_clear_window(fdf->mlx, fdf->mlx_win);
-	}
 	return (0);
 }
 
 int	key_hook(int keycode, t_data *fdf)
 {
 	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(fdf->mlx, fdf->mlx_win);
-		exit(0);
-	}
+		terminate(fdf);
 	if (keycode == KEY_NP_MIN || keycode == KEY_NP_PLUS || \
 	keycode == KEY_A || keycode == KEY_D || keycode == KEY_S || \
 	keycode == KEY_W)
@@ -32,6 +34,8 @@ int	key_hook(int keycode, t_data *fdf)
 static t_data	*init(t_data *fdf)
 {
 	fdf = (t_data *)ft_memalloc(sizeof(t_data));
+	if (!fdf)
+		terminate(NULL);
 	fdf->mlx = mlx_init();
 	fdf->mlx_win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "FDF");
 	fdf->img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
@@ -57,7 +61,9 @@ int	main(int argc, char *argv[])
 	fd = open(argv[1], O_RDONLY);
 	fdf = init(fdf);
 	parsemap(fd, fdf);
+	close(fd);
 	mlx_mouse_hook(fdf->mlx_win, mouse_hook, fdf);
 	mlx_key_hook(fdf->mlx_win, key_hook, fdf);
+	mlx_hook(fdf->mlx_win, 17, 0, terminate, fdf);
 	mlx_loop(fdf->mlx);
 }
