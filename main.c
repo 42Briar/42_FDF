@@ -7,14 +7,7 @@ int	terminate(void *param)
 	return (0);
 }
 
-int	mouse_hook(int button, int x, int y, t_data *fdf)
-{
-	if (button == 2)
-		mlx_clear_window(fdf->mlx, fdf->mlx_win);
-	return (0);
-}
-
-int	key_hook(int keycode, t_data *fdf)
+static int	key_hook(int keycode, t_data *fdf)
 {
 	if (keycode == KEY_ESC)
 		terminate(fdf);
@@ -58,11 +51,11 @@ int	main(int argc, char *argv[])
 
 	if (argc > 2 || argc < 2)
 		exit(0);
+	fdf = NULL;
 	fd = open(argv[1], O_RDONLY);
 	fdf = init(fdf);
 	parsemap(fd, fdf);
 	close(fd);
-	mlx_mouse_hook(fdf->mlx_win, mouse_hook, fdf);
 	mlx_key_hook(fdf->mlx_win, key_hook, fdf);
 	mlx_hook(fdf->mlx_win, 17, 0, terminate, fdf);
 	mlx_loop(fdf->mlx);

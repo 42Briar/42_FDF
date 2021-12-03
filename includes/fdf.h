@@ -2,7 +2,6 @@
 # define FDF_H
 
 # include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
 # include "../libft/libft.h"
 # include "keycodes.h"
 # include "colours.h"
